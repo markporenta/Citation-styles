@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>FS LJ</title>
+    <id>http://www.zotero.org/styles/fs-lj</id>
+    <link rel="self" href="http://www.zotero.org/styles/fs-lj"/>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <category field="generic-base"/>
+    <summary>FS LJ style</summary>
+    <updated>2025-05-13T11:13:31+00:00</updated>
+  </info>
+  <locale xml:lang="en">
+    <date form="text">
+      <date-part name="month" form="short" suffix=" "/>
+      <date-part name="day" form="numeric-leading-zeros" suffix=", "/>
+      <date-part name="year"/>
+    </date>
+    <terms>
+      <term name="chapter" form="short">ch.</term>
+      <term name="presented at">presented at the</term>
+      <term name="available at">available</term>
+    </terms>
+  </locale>
+  <macro name="editor">
+    <names variable="editor" suffix=" (ur.):">
+      <name initialize-with=". "/>
+    </names>
+  </macro>
+  <macro name="locators">
+    <group>
+      <text variable="collection-title"/>
+      <group delimiter=" "/>
+      <group delimiter=" ">
+        <number variable="number-of-volumes" form="numeric"/>
+        <text term="volume" form="short" plural="true"/>
+      </group>
+      <group delimiter=" "/>
+    </group>
+  </macro>
+  <macro name="page">
+    <text value="str. "/>
+    <text variable="page"/>
+  </macro>
+  <macro name="citation-locator">
+    <group delimiter=" ">
+      <choose>
+        <if locator="page">
+          <label variable="locator" form="short"/>
+        </if>
+        <else>
+          <label variable="locator" form="short" text-case="capitalize-first"/>
+        </else>
+      </choose>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <citation>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout delimiter=", " prefix="[" suffix="]">
+      <group delimiter=", ">
+        <text variable="citation-number" strip-periods="false" quotes="false" font-style="normal" font-variant="normal" font-weight="normal" text-decoration="none" vertical-align="baseline"/>
+        <text macro="citation-locator"/>
+      </group>
+    </layout>
+  </citation>
+  <bibliography entry-spacing="0" second-field-align="flush">
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <choose>
+        <if type="article-journal">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" quotes="false" font-style="italic" suffix="."/>
+            <text variable="container-title" font-style="normal"/>
+            <group>
+              <number font-weight="bold" prefix=" " variable="volume"/>
+              <number prefix=":" variable="issue"/>
+            </group>
+            <date date-parts="year" variable="issued" prefix=" (" suffix=")">
+              <date-part name="year" form="long"/>
+            </date>
+            <text variable="page" prefix=" str. "/>
+          </group>
+        </if>
+        <else-if type="paper-conference speech" match="any">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" quotes="false" font-style="italic" suffix="."/>
+            <choose>
+              <if match="any" variable="editor container-title">
+                <text value="V: "/>
+              </if>
+            </choose>
+            <text macro="editor"/>
+            <text variable="container-title" font-style="italic" prefix=" " suffix="."/>
+            <group delimiter=", " prefix=" ">
+              <text variable="event-place"/>
+              <date date-parts="year" variable="issued">
+                <date-part name="year" form="long"/>
+              </date>
+              <text macro="page"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="thesis">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" font-style="italic" suffix=":"/>
+            <text value="doktorska disertacija." font-style="italic"/>
+            <group delimiter=", ">
+              <text variable="publisher-place" prefix=" "/>
+              <date date-parts="year" form="text" variable="issued"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="book" match="any">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" font-style="italic" suffix="."/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+              <date date-parts="year" form="text" variable="issued"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="chapter" match="any">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" font-style="italic" suffix="."/>
+            <choose>
+              <if match="any" variable="editor container-title">
+                <text value="V:"/>
+              </if>
+            </choose>
+            <text macro="editor"/>
+            <text variable="container-title" font-style="italic" suffix="."/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+              <date date-parts="year" form="text" variable="issued"/>
+              <text macro="page"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="webpage post-weblog post" match="any">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" font-style="italic" suffix="."/>
+            <text value="Dostopno na:"/>
+            <group delimiter=", ">
+              <text variable="URL"/>
+              <group>
+                <text value="ogled:"/>
+                <date delimiter="." variable="accessed">
+                  <date-part name="day"/>
+                  <date-part name="month" form="numeric"/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="report">
+          <group delimiter=" " suffix=".">
+            <text macro="author"/>
+            <text variable="title" font-style="italic" suffix="."/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <date date-parts="year" form="text" variable="issued"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="entry-encyclopedia entry-dictionary entry" match="any">
+          <group delimiter=" " suffix=".">
+            <text variable="title" font-style="italic" suffix="."/>
+            <text value="V:"/>
+            <text variable="container-title" suffix="."/>
+            <group delimiter=", ">
+              <group delimiter=" ">
+                <text value="Dostopno na:"/>
+                <text variable="URL"/>
+              </group>
+              <group delimiter=" ">
+                <text value="ogled:"/>
+                <date delimiter="." variable="accessed">
+                  <date-part name="day"/>
+                  <date-part name="month" form="numeric"/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="encyclopedia dictionary" match="any">
+          <group delimiter=" " suffix=".">
+            <text variable="title" font-style="italic" suffix="."/>
+            <text value="V:"/>
+            <text variable="container-title" suffix="."/>
+            <group delimiter=", ">
+              <group delimiter=" ">
+                <text value="Dostopno na:"/>
+                <text variable="URL"/>
+              </group>
+              <group delimiter=" ">
+                <text value="ogled:"/>
+                <date delimiter="." variable="accessed">
+                  <date-part name="day"/>
+                  <date-part name="month" form="numeric"/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=", " suffix=". ">
+            <text macro="author"/>
+            <text variable="title"/>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+          <group delimiter=", " suffix=".">
+            <text macro="publisher"/>
+            <text macro="page"/>
+            <text macro="issued"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
+
